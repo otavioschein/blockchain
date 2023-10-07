@@ -1,8 +1,17 @@
 ## Projeto Blockchain em nodejs
 - packages usados:
- - crypto.js (npm i crypto-js --save);
- - pg (npm install pg);
- - ws (npm i ws --save);
+ - crypto.js
+   ```
+   npm i crypto-js --save
+   ```
+ - pg
+   ```
+   npm install pg
+   ```
+ - ws
+   ```
+   npm i ws --save
+   ```
 
 ## Para rodar a rede em mais um peer:
 - primeiro terminal:
