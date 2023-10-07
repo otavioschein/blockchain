@@ -1,4 +1,5 @@
 const SHA256 = require('crypto-js/sha256.js');
+const insertOffchain = require('./offchain');
 
 class Block{
     constructor(timestamp, lastHash, hash, data){
@@ -24,12 +25,23 @@ class Block{
         return SHA256(`${timestamp}${lastHash}${data}`).toString();
     }
 
+    static hashData(data) {
+        return SHA256(`${data}`).toString();
+    }
+
     static mineBlock(lastBlock, data) {
         let hash;
         let timestamp = Date.now();
         const lastHash = lastBlock.hash;
-        hash = Block.hash(timestamp, lastHash ,data);
-        return new this(timestamp, lastHash, hash, data);
+        hash = Block.hash(timestamp, lastHash, data);
+        let dataHashed = this.offchainData(data);
+        return new this(timestamp, lastHash, hash, dataHashed);
+    }
+
+    static offchainData(data) {
+        insertOffchain(data);
+        let hashedData = SHA256(`${data}`).toString();
+        return hashedData;
     }
 
     static blockHash(block) {
