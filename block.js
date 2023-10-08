@@ -25,10 +25,6 @@ class Block{
         return SHA256(`${timestamp}${lastHash}${data}`).toString();
     }
 
-    static hashData(data) {
-        return SHA256(`${data}`).toString();
-    }
-
     static mineBlock(lastBlock, data) {
         let hash;
         let timestamp = Date.now();
@@ -40,7 +36,7 @@ class Block{
 
     static offchainData(data) {
         insertOffchain(data);
-        let hashedData = SHA256(`${data}`).toString();
+        let hashedData = this.hash(Date.now(), '', data);
         return hashedData;
     }
 
