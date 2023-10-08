@@ -1,3 +1,5 @@
+// função responsável pela off-chain
+// recebe os dados e insere em um banco de dados externo
 async function insertOffchain(data) {
     const { Pool } = require('pg');
 

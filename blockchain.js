@@ -1,10 +1,12 @@
 const Block = require('./block.js')
 
+// classe responsável pela blockchain
 class Blockchain {
     constructor(){
         this.chain = [Block.genesis()];
     }
   
+    // função que adiciona um bloco na rede
     addBlock(data){
         const block = Block.mineBlock(this.chain[this.chain.length-1], data);
         this.chain.push(block);
@@ -12,6 +14,8 @@ class Blockchain {
         return block;
     }
 
+    // função que valida a blockchain atual
+    // utilizada para o consenso da rede
     isValidChain(chain) {
         if(JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
             return false;
@@ -25,6 +29,7 @@ class Blockchain {
         return true;
     }
 
+    // função que substitui a rede antiga pela atual, após adicionar um novo bloco
     replaceChain(newChain) {
         if(newChain.length <= this.chain.length) {
             console.log("Recieved chain is not longer than the current chain");
