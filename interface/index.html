@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Notas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registro de Notas</h1>
+        <form id="notaForm">
+            <label for="matricula">Matrícula:</label>
+            <input type="text" id="matricula" name="matricula" required>
+
+            <label for="aluno">Nome do Aluno:</label>
+            <input type="text" id="aluno" name="aluno" required>
+
+            <label for="mediaG1">Média G1:</label>
+            <input type="number" step="0.1" id="mediaG1" name="mediaG1" required>
+
+            <label for="mediaG2">Média G2:</label>
+            <input type="number" step="0.1" id="mediaG2" name="mediaG2" required>
+
+            <label for="mediaFinal">Média Final:</label>
+            <input type="number" step="0.1" id="mediaFinal" name="mediaFinal" required>
+
+            <label for="disciplina">Disciplina:</label>
+            <input type="text" id="disciplina" name="disciplina" required>
+
+            <button type="button" onclick="submitForm()">Enviar</button>
+        </form>
+    </div>
+
+    <div class="side-panel">
+        <h2>Consultar Notas</h2>
+        <label for="consultaMatricula">Matrícula:</label>
+        <input type="text" id="consultaMatricula" name="consultaMatricula">
+
+        <button type="button" onclick="consultarNotas()">Consultar</button>
+
+        <div class="result-container" id="resultContainer"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
