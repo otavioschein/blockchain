@@ -1,5 +1,5 @@
 const SHA256 = require('crypto-js/sha256.js');
-const insertOffchain = require('./offchain');
+const CryptoJS = require('crypto-js');
 
 // classe de funções de um bloco
 class Block{
@@ -10,13 +10,13 @@ class Block{
         this.data = data;
     }
 
-    toString(){
-        return `Block - 
-        Timestamp : ${this.timestamp}
-        Last Hash : ${this.lastHash.substring(0,10)}
-        Hash      : ${this.hash.substring(0,10)}
-        Data      : ${this.data}`;
-    }
+    // toString(){
+    //     return `Block - 
+    //     Timestamp : ${this.timestamp}
+    //     Last Hash : ${this.lastHash.substring(0,10)}
+    //     Hash      : ${this.hash.substring(0,10)}
+    //     Data      : ${this.data}`;
+    // }
 
     // gera um bloco genesis
     static genesis() {
@@ -28,22 +28,26 @@ class Block{
         return SHA256(`${timestamp}${lastHash}${data}`).toString();
     }
 
+    // função que criptografa os dados
+    static encrypt(data, secretKey) {
+        return CryptoJS.AES.encrypt(data, secretKey).toString();
+    }
+
+    // função que descriptografa os dados
+    static decrypt(encryptedData, secretKey) {
+        const bytes = CryptoJS.AES.decrypt(encryptedData.data, secretKey);
+        const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+        return JSON.parse(decryptedData);
+    }
+
     // função que minera um bloco de forma simples
-    static mineBlock(lastBlock, data) {
+    static mineBlock(lastBlock, secretKey, data) {
         let hash;
         let timestamp = Date.now();
         const lastHash = lastBlock.hash;
         hash = Block.hash(timestamp, lastHash, data);
-        let dataHashed = this.offchainData(data);
-        return new this(timestamp, lastHash, hash, dataHashed);
-    }
-
-    // função com a estratégia de off-chain
-    // insere os dados recebidos em um banco de dados externo e retorna esses dados em hash
-    static offchainData(data) {
-        insertOffchain(data);
-        let hashedData = this.hash(Date.now(), '', data);
-        return hashedData;
+        let dataEncrypted = this.encrypt(JSON.stringify(data), secretKey);
+        return new this(timestamp, lastHash, hash, dataEncrypted);
     }
 
     // gera um hash para o bloco

@@ -7,11 +7,34 @@ class Blockchain {
     }
   
     // função que adiciona um bloco na rede
-    addBlock(data){
-        const block = Block.mineBlock(this.chain[this.chain.length-1], data);
+    addBlock(secretKey, data){
+        const block = Block.mineBlock(this.chain[this.chain.length-1], secretKey, data);
         this.chain.push(block);
         
         return block;
+    }
+
+    // função para encontrar um bloco pelo hash
+    getBlock(hash) {
+        // Percorrer cada bloco na cadeia
+        for (const block of this.chain) {
+            // Verificar se o hash do bloco corresponde ao hash fornecido
+            if (block.hash === hash) {
+                // Retornar o bloco encontrado
+                return block;
+            }
+        }
+        // Retornar null se nenhum bloco com o hash fornecido for encontrado
+        return null;
+    }
+
+    // função que retorna os dados descriptografados para um bloco específico
+    getData(block, secretKey) {
+        console.log(block);
+        if (block === null) {
+            return 'bloco nulo';
+        }
+        return Block.decrypt(block, secretKey);
     }
 
     // função que valida a blockchain atual
