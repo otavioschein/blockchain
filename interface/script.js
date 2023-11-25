@@ -25,8 +25,8 @@ function submitForm() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Success:', data);
-        alert('Nota registrada com sucesso!');
+        console.log('Success:', data.length - 1);
+        alert('Nota registrada com sucesso! Hash: ' + data[data.length - 1].hash);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -45,7 +45,6 @@ function getGrade() {
             resultContainer.innerHTML = '';
 
             const notaInfo = document.createElement('p');
-            console.log('Nota:', data)
             notaInfo.textContent =`Aluno: ${data.aluno}, Disciplina: ${data.disciplina}, Média G1: ${data.mediaG1}, Média G2: ${data.mediaG2}, Média Final: ${data.mediaFinal}`;
             resultContainer.appendChild(notaInfo);
         })

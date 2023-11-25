@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const P2pserver = require('./p2p-server.js');
 const Blockchain = require('../blockchain.js');
-const Block = require('../block.js');
 const BodyParser = require('body-parser');
 
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
@@ -32,7 +31,7 @@ app.get('/nota/:hash/:secretKey', async (req, res) => {
 app.post('/mine/:secretKey', (req, res) => {
     const { secretKey } = req.params;
     const block = blockchain.addBlock(secretKey, req.body.data);
-    console.log(`New block added: ${block.toString()}`);
+    console.log(`New block added: ${JSON.stringify(block)}`);
 
     res.redirect('/blocks');
     p2pserver.syncChain();
