@@ -16,7 +16,6 @@ function submitForm() {
         disciplina,
     };
 
-    // Use fetch API to send data to your server
     fetch(`http://localhost:3001/mine/${key}`, {
         method: 'POST',
         headers: {
@@ -68,10 +67,6 @@ function getBlockchain() {
                 blockInfo.textContent = JSON.stringify(block);
                 resultContainer.appendChild(blockInfo);
             }
-            // const notaInfo = document.createElement('p');
-            // console.log('Nota:', data.toString())
-            // notaInfo.textContent = data.toString();
-            // resultContainer.appendChild(notaInfo);
         })
         .catch(error => {
             console.error('Error:', error);
