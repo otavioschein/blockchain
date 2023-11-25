@@ -55,6 +55,7 @@ button:hover {
 
 .side-panel {
     margin-top: 20px;
+    margin-left: 5px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -93,7 +94,7 @@ button:hover {
 .result-container {
     margin-top: 20px;
     width: 100%;
-    max-width: 400px;
+    max-width: 100px;
     background-color: #fff;
     padding: 10px;
     border-radius: 8px;
@@ -101,6 +102,21 @@ button:hover {
 }
 
 .result-container p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.result-containerBlockchain {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.result-containerBlockchain p {
     margin: 0;
     font-weight: bold;
 }

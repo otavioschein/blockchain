@@ -30,18 +30,31 @@
             <label for="disciplina">Disciplina:</label>
             <input type="text" id="disciplina" name="disciplina" required>
 
+            <label for="chave">Chave privada:</label>
+            <input type="text" id="chave" name="chave" required>
+
             <button type="button" onclick="submitForm()">Enviar</button>
         </form>
     </div>
 
     <div class="side-panel">
         <h2>Consultar Notas</h2>
-        <label for="consultaMatricula">Matrícula:</label>
-        <input type="text" id="consultaMatricula" name="consultaMatricula">
+        <label for="hash">Hash:</label>
+        <input type="text" id="hash" name="hash">
 
-        <button type="button" onclick="consultarNotas()">Consultar</button>
+        <label for="chave_privada">Chave Privada:</label>
+        <input type="text" id="chave_privada" name="chave_privada">
+
+
+        <button type="button" onclick="getGrade()">Consultar</button>
 
         <div class="result-container" id="resultContainer"></div>
+    </div>
+
+    <div class="side-panel">
+        <h2>Consultar Blockchain</h2>
+        <button type="button" onclick="getBlockchain()">Consultar</button>
+        <div class="result-container" id="resultContainerBlockchain"></div>
     </div>
 
     <script src="script.js"></script>
